@@ -1,0 +1,22 @@
+{
+  "name": "ticker_graph",
+  "module": "src/index.tsx",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "DEV=true bun run --watch src/index.jsx"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "react-devtools-core": "7"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@opentui/core": "^0.1.69",
+    "@opentui/react": "^0.1.69",
+    "react": "^19.2.3",
+    "yahoo-finance2": "^3.11.2"
+  }
+}

@@ -1,0 +1,35 @@
+[
+  { "date": 1767225600, "open": 50, "high": 70, "low": 45, "close": 65, "volume": 80 },
+  { "date": 1767312000, "open": 65, "high": 75, "low": 55, "close": 60, "volume": 60 },
+  { "date": 1767398400, "open": 60, "high": 85, "low": 58, "close": 80, "volume": 90 },
+  { "date": 1767484800, "open": 80, "high": 88, "low": 70, "close": 72, "volume": 75 },
+  { "date": 1767571200, "open": 72, "high": 90, "low": 68, "close": 85, "volume": 95 },
+  { "date": 1767657600, "open": 85, "high": 95, "low": 80, "close": 82, "volume": 70 },
+  { "date": 1767744000, "open": 82, "high": 100, "low": 78, "close": 95, "volume": 100 },
+  { "date": 1767830400, "open": 95, "high": 98, "low": 85, "close": 88, "volume": 85 },
+  { "date": 1767916800, "open": 88, "high": 92, "low": 75, "close": 78, "volume": 65 },
+  { "date": 1768003200, "open": 78, "high": 85, "low": 70, "close": 82, "volume": 90 },
+
+  { "date": 1768089600, "open": 50, "high": 70, "low": 45, "close": 65, "volume": 80 },
+  { "date": 1768176000, "open": 65, "high": 75, "low": 55, "close": 60, "volume": 60 },
+  { "date": 1768262400, "open": 60, "high": 85, "low": 58, "close": 80, "volume": 90 },
+  { "date": 1768348800, "open": 80, "high": 88, "low": 70, "close": 72, "volume": 75 },
+  { "date": 1768435200, "open": 72, "high": 90, "low": 68, "close": 85, "volume": 95 },
+  { "date": 1768521600, "open": 85, "high": 95, "low": 80, "close": 82, "volume": 70 },
+  { "date": 1768608000, "open": 82, "high": 100, "low": 78, "close": 95, "volume": 100 },
+  { "date": 1768694400, "open": 95, "high": 98, "low": 85, "close": 88, "volume": 85 },
+  { "date": 1768780800, "open": 88, "high": 92, "low": 75, "close": 78, "volume": 65 },
+  { "date": 1768867200, "open": 78, "high": 85, "low": 70, "close": 82, "volume": 90 },
+
+  { "date": 1768953600, "open": 50, "high": 70, "low": 45, "close": 65, "volume": 80 },
+  { "date": 1769040000, "open": 65, "high": 75, "low": 55, "close": 60, "volume": 60 },
+  { "date": 1769126400, "open": 60, "high": 85, "low": 58, "close": 80, "volume": 90 },
+  { "date": 1769212800, "open": 80, "high": 88, "low": 70, "close": 72, "volume": 75 },
+  { "date": 1769299200, "open": 72, "high": 90, "low": 68, "close": 85, "volume": 95 },
+  { "date": 1769385600, "open": 85, "high": 95, "low": 80, "close": 82, "volume": 70 },
+  { "date": 1769472000, "open": 82, "high": 100, "low": 78, "close": 95, "volume": 100 },
+  { "date": 1769558400, "open": 95, "high": 98, "low": 85, "close": 88, "volume": 85 },
+  { "date": 1769644800, "open": 88, "high": 92, "low": 75, "close": 78, "volume": 65 },
+  { "date": 1769731200, "open": 78, "high": 85, "low": 70, "close": 82, "volume": 90 }
+]
+
