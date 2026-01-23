@@ -18,7 +18,7 @@ export function App() {
     "2026-01-09",
   );
   const [showModal, setShowModal] = useState(false);
-  const [updateXAxis, setUpdateXAxis] = useState(true);
+  const [updateModalCategory, setUpdateModalCategory] = useState("ROW");
   const [modalText, setModalText] = useState("");
   const renderer = useRenderer();
   const {
@@ -45,12 +45,12 @@ export function App() {
     }
     if (key.ctrl && key.name == "r") {
       setModalText("Enter the row value: ");
-      setUpdateXAxis(false);
+      setUpdateModalCategory("ROW");
       setShowModal(true);
     }
     if (key.ctrl && key.name == "d") {
       setModalText("Enter the number of columns: ");
-      setUpdateXAxis(true);
+      setUpdateModalCategory("COLUMN");
       setShowModal(true);
     }
     if (key.name === "escape") {
@@ -120,11 +120,11 @@ export function App() {
         showModal={showModal}
         setShowModal={setShowModal}
         modalText={modalText}
-        updateXAxis={updateXAxis}
+        updateModalCategory={updateModalCategory}
         handleSubmitCallback={(value) => {
-          if (updateXAxis == false) {
+          if (updateModalCategory == "ROW") {
             setRowValue(value);
-          } else {
+          } else if(updateModalCategory == "COLUMN") {
             setMaxRowsAllowed(value);
           }
         }}

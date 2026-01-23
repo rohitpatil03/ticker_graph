@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 
-export function Modal({ showModal, setShowModal, modalText, updateXAxis, handleSubmitCallback }) {
+export function Modal({ showModal, setShowModal, modalText, updateModalCategory, handleSubmitCallback }) {
   const [value, setValue] = useState("");
   const [safeValue, setSafeValue] = useState("");
 
@@ -11,7 +11,7 @@ export function Modal({ showModal, setShowModal, modalText, updateXAxis, handleS
       console.log("2) InputNum", inputNum);
       setSafeValue(inputNum);
     }
-  }, [updateXAxis]);
+  }, [updateModalCategory]);
 
   const handleSubmit = useCallback((value) => {
     let inputNum = Number(value);
@@ -21,7 +21,7 @@ export function Modal({ showModal, setShowModal, modalText, updateXAxis, handleS
 
     setShowModal(false);
     setValue("");
-  }, [updateXAxis]);
+  }, [updateModalCategory]);
 
   return (
     <>
