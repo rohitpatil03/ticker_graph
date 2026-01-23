@@ -5,10 +5,8 @@ export function Modal({ showModal, setShowModal, modalText, updateModalCategory,
   const [safeValue, setSafeValue] = useState("");
 
   const handleInputChange = useCallback((value) => {
-    console.log("1) value", value);
     let inputNum = Number(value);
     if (typeof inputNum === "number" && !isNaN(inputNum) && inputNum > 0) {
-      console.log("2) InputNum", inputNum);
       setSafeValue(inputNum);
     }
   }, [updateModalCategory]);
