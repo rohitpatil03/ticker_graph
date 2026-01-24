@@ -11,15 +11,29 @@ import { Modal } from "./Modal.jsx";
  */
 export function App() {
   // const { data, isLoading, error } = useChartData("./src/data.json");
-  const { data, isLoading, error } = useChartDataFromYahoo(
-    "AAPL",
-    "1h",
-    "2026-01-05",
-    "2026-01-09",
-  );
+
+  const endDate = Math.floor(Date.now() / 1000);
+  const options = ["15m", "30m", "1h", "1d"];
+
+  const [stockOptions, setStockOptions] = useState({
+    name: "AAPL",
+    interval: "1h",
+    end_date: endDate,
+    start_date: endDate - 86400 * 3,
+  });
+  const [selectionOptionsHashMap, setSelectionOptionsHashMap] = useState({
+    options: [],
+    selected_option: "",
+  });
   const [showModal, setShowModal] = useState(false);
   const [updateModalCategory, setUpdateModalCategory] = useState("ROW");
   const [modalText, setModalText] = useState("");
+  const { data, isLoading, error } = useChartDataFromYahoo(
+    stockOptions.name,
+    stockOptions.interval,
+    stockOptions.start_date,
+    stockOptions.end_date,
+  );
   const renderer = useRenderer();
   const {
     chartWidth,
@@ -53,8 +67,27 @@ export function App() {
       setUpdateModalCategory("COLUMN");
       setShowModal(true);
     }
+    if (key.ctrl && key.name == "a") {
+      setModalText("Enter the Stock Name: ");
+      setUpdateModalCategory("STOCK_NAME");
+      setShowModal(true);
+    }
+    if (key.ctrl && key.name == "q") {
+      setModalText("Enter the Stock Interval: ");
+      setSelectionOptionsHashMap({
+        selected_option: options[0] != null ? options[0] : null,
+        options: options,
+      });
+      setUpdateModalCategory("STOCK_INTERVAL");
+      setShowModal(true);
+    }
+
     if (key.name === "escape") {
       setShowModal(false);
+      setSelectionOptionsHashMap({
+        options: [],
+        selected_option: "",
+      });
     }
   });
 
@@ -104,7 +137,7 @@ export function App() {
 
   return (
     <>
-      <text>Apple Inc. (AAPL)</text>
+      <text>STOCK NAME: ({stockOptions.name})</text>
       <ChartBody
         data={data}
         chartWidth={chartWidth}
@@ -121,11 +154,31 @@ export function App() {
         setShowModal={setShowModal}
         modalText={modalText}
         updateModalCategory={updateModalCategory}
+        selectionOptionsHashMap={selectionOptionsHashMap}
+        setSelectionOptionsHashMap={setSelectionOptionsHashMap}
         handleSubmitCallback={(value) => {
           if (updateModalCategory == "ROW") {
             setRowValue(value);
-          } else if(updateModalCategory == "COLUMN") {
+          }
+          if (updateModalCategory == "COLUMN") {
             setMaxRowsAllowed(value);
+          }
+          if (updateModalCategory == "STOCK_NAME") {
+            setStockOptions((prev) => ({
+              ...prev,
+              name: value,
+            }));
+          }
+          if (updateModalCategory == "STOCK_INTERVAL") {
+            setStockOptions((prev) => ({
+              ...prev,
+              interval: value,
+            }));
+            setShowModal(false);
+            setSelectionOptionsHashMap({
+              options: [],
+              selected_option: "",
+            });
           }
         }}
       />

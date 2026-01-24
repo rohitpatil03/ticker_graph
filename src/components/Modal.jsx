@@ -1,39 +1,91 @@
 import { useEffect, useState, useCallback } from "react";
+import { useKeyboard } from "@opentui/react";
 
-export function Modal({ showModal, setShowModal, modalText, updateModalCategory, handleSubmitCallback }) {
+export function Modal({
+  showModal,
+  setShowModal,
+  modalText,
+  updateModalCategory,
+  selectionOptionsHashMap,
+  setSelectionOptionsHashMap,
+  handleSubmitCallback,
+}) {
   const [value, setValue] = useState("");
   const [safeValue, setSafeValue] = useState("");
 
-  const handleInputChange = useCallback((value) => {
-    let inputNum = Number(value);
-    if (typeof inputNum === "number" && !isNaN(inputNum) && inputNum > 0) {
-      setSafeValue(inputNum);
+  useKeyboard((key) => {
+    if (key.name === "tab" && selectionOptionsHashMap != {}) {
+      setSelectionOptionsHashMap((prev) => {
+        let newSelectedOption = null;
+        for (let i = 0; i < prev.options.length; i++) {
+          if (prev.selected_option == prev.options[i]) {
+            newSelectedOption = prev.options[(i+1) % prev.options.length];
+            break;
+          }
+        }
+        return {
+          ...prev,
+          selected_option: newSelectedOption,
+        };
+      });
     }
-  }, [updateModalCategory]);
-
-  const handleSubmit = useCallback((value) => {
-    let inputNum = Number(value);
-    if (typeof inputNum === "number" && !isNaN(inputNum) && inputNum > 0) {
-      handleSubmitCallback(inputNum);
+    if (key.name === "return" && selectionOptionsHashMap != {}) {
+      handleSubmitCallback(selectionOptionsHashMap.selected_option);
     }
+  });
 
-    setShowModal(false);
-    setValue("");
-  }, [updateModalCategory]);
+  const handleInputChange = useCallback(
+    (value) => {
+      let inputNum = Number(value);
+      if (
+        typeof inputNum === "number" &&
+        !isNaN(inputNum) &&
+        inputNum > 0 &&
+        updateModalCategory == "ROW" &&
+        updateModalCategory == "COLUMN"
+      ) {
+        setSafeValue(inputNum);
+      } else {
+        setSafeValue(value);
+      }
+    },
+    [updateModalCategory],
+  );
+
+  const handleSubmit = useCallback(
+    (value) => {
+      let inputNum = Number(value);
+      if (
+        typeof inputNum === "number" &&
+        !isNaN(inputNum) &&
+        inputNum > 0 &&
+        updateModalCategory == "ROW" &&
+        updateModalCategory == "COLUMN"
+      ) {
+        handleSubmitCallback(inputNum);
+      } else {
+        handleSubmitCallback(value);
+      }
+
+      setShowModal(false);
+      setValue("");
+    },
+    [updateModalCategory],
+  );
 
   return (
     <>
       {showModal && (
-        <>
-          <box
-            width={"100%"}
-            height={"100%"}
-            justifyContent="center"
-            alignItems="center"
-            position="absolute"
-          >
-            <box border={true} backgroundColor="black" width="30%" height="15%">
-              <text>{modalText}</text>
+        <box
+          width="100%"
+          height="100%"
+          justifyContent="center"
+          alignItems="center"
+          position="absolute"
+        >
+          <box border={true} backgroundColor="black" width="30%" height="25%">
+            <text marginBottom={"3%"}>{modalText}</text>
+            {selectionOptionsHashMap.options.length == 0 ? (
               <input
                 placeholder="Enter Your Input here..."
                 value={value}
@@ -41,9 +93,36 @@ export function Modal({ showModal, setShowModal, modalText, updateModalCategory,
                 onSubmit={handleSubmit}
                 focused={showModal}
               />
+            ) : (
+              <></>
+            )}
+
+            <box
+              flexDirection="row"
+              justifyContent="center"
+              alignItems="center"
+              flexWrap="wrap"
+            >
+              {selectionOptionsHashMap.options.map((item) => (
+                <box
+                  key={item}
+                  flexDirection="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  gap={"5%"}
+                  width={"20%"}
+                  borderColor={
+                    selectionOptionsHashMap.selected_option == item
+                      ? "cyan"
+                      : "white"
+                  }
+                >
+                  <text>{item}</text>
+                </box>
+              ))}
             </box>
           </box>
-        </>
+        </box>
       )}
     </>
   );
