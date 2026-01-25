@@ -71,7 +71,6 @@ export function Modal({
         (updateModalCategory == "STOCK_START_DATE" ||
           updateModalCategory == "STOCK_END_DATE")
       ) {
-        console.log(Math.floor(inputDate.getTime() / 1000));
         handleSubmitCallback(Math.floor(inputDate.getTime() / 1000));
       } else {
         handleSubmitCallback(value);
@@ -93,8 +92,8 @@ export function Modal({
           alignItems="center"
           position="absolute"
         >
-          <box border={true} backgroundColor="black" width="30%" height="25%">
-            <text marginBottom={"3%"}>{modalText}</text>
+          <box border={true} backgroundColor="black" width="30%" height="25%" padding={"1%"}>
+            <text marginBottom={"1%"}>{modalText}</text>
             {selectionOptionsHashMap.options.length == 0 ? (
               <input
                 placeholder="Enter Your Input here..."
