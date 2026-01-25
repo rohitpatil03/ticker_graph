@@ -72,6 +72,17 @@ export function App() {
       setUpdateModalCategory("STOCK_NAME");
       setShowModal(true);
     }
+    if (key.ctrl && key.name == "t") {
+      setModalText("Enter the Start Date (dd/mm/yyyy): ");
+      setUpdateModalCategory("STOCK_START_DATE");
+      setShowModal(true);
+    }
+    if (key.ctrl && key.name == "y") {
+      setModalText("Enter the End Date (dd/mm/yyyy): ");
+      setUpdateModalCategory("STOCK_END_DATE");
+      setShowModal(true);
+    }
+
     if (key.ctrl && key.name == "q") {
       setModalText("Enter the Stock Interval: ");
       setSelectionOptionsHashMap({
@@ -169,6 +180,21 @@ export function App() {
               name: value,
             }));
           }
+          if (updateModalCategory == "STOCK_START_DATE") {
+            setStockOptions((prev) => ({
+              ...prev,
+              start_date:
+                prev.end_date > value ? value : prev.start_date,
+            }));
+          }
+          if (updateModalCategory == "STOCK_END_DATE") {
+            setStockOptions((prev) => ({
+              ...prev,
+              end_date:
+                prev.start_date < value ? value : prev.end_date,
+            }));
+          }
+
           if (updateModalCategory == "STOCK_INTERVAL") {
             setStockOptions((prev) => ({
               ...prev,

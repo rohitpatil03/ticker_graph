@@ -19,7 +19,7 @@ export function Modal({
         let newSelectedOption = null;
         for (let i = 0; i < prev.options.length; i++) {
           if (prev.selected_option == prev.options[i]) {
-            newSelectedOption = prev.options[(i+1) % prev.options.length];
+            newSelectedOption = prev.options[(i + 1) % prev.options.length];
             break;
           }
         }
@@ -55,14 +55,24 @@ export function Modal({
   const handleSubmit = useCallback(
     (value) => {
       let inputNum = Number(value);
+      const [day, month, year] = value.split(/[\/-]/).map(Number);
+      const inputDate = new Date(year, month - 1, day);
       if (
         typeof inputNum === "number" &&
         !isNaN(inputNum) &&
         inputNum > 0 &&
-        updateModalCategory == "ROW" &&
-        updateModalCategory == "COLUMN"
+        (updateModalCategory == "ROW" || updateModalCategory == "COLUMN")
       ) {
         handleSubmitCallback(inputNum);
+      }
+      if (
+        inputDate instanceof Date &&
+        !isNaN(inputDate) &&
+        (updateModalCategory == "STOCK_START_DATE" ||
+          updateModalCategory == "STOCK_END_DATE")
+      ) {
+        console.log(Math.floor(inputDate.getTime() / 1000));
+        handleSubmitCallback(Math.floor(inputDate.getTime() / 1000));
       } else {
         handleSubmitCallback(value);
       }
