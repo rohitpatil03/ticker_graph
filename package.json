@@ -4,7 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "DEV=true bun run --watch src/index.jsx"
+    "dev": "DEV=true bun run --watch src/index.jsx",
+    "build": "bun build --compile ./src/index.jsx --outfile ticker_graph"
   },
   "devDependencies": {
     "@types/bun": "latest",
