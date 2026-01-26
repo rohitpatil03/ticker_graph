@@ -14,7 +14,7 @@ export function Modal({
   const [safeValue, setSafeValue] = useState("");
 
   useKeyboard((key) => {
-    if (key.name === "tab" && selectionOptionsHashMap != {}) {
+    if (key.name === "tab" && selectionOptionsHashMap != {} && showModal) {
       setSelectionOptionsHashMap((prev) => {
         let newSelectedOption = null;
         for (let i = 0; i < prev.options.length; i++) {
