@@ -3,7 +3,7 @@ import { epochToDDMMYY } from "../utils/dateFormatter.js";
 /**
  * X-Axis component displaying date labels
  */
-export function XAxis({ data, colValue, maxRowsAllowed, startIndex, endIndex }) {
+export function XAxis({ data, colValue, maxRowsAllowed, stockOptions, startIndex, endIndex }) {
   return (
     <box
       flexDirection="row"
@@ -15,7 +15,7 @@ export function XAxis({ data, colValue, maxRowsAllowed, startIndex, endIndex }) 
           ? (() => {
               return (
                 <box key={i} marginLeft={colValue}>
-                  <text>{epochToDDMMYY(candle.date)}</text>
+                  <text>{epochToDDMMYY(candle.date, stockOptions.interval)}</text>
                 </box>
               );
             })()

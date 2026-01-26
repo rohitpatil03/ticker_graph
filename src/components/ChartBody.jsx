@@ -15,6 +15,7 @@ export function ChartBody({
   setMaxValue,
   maxRowsAllowed,
   setMaxRowsAllowed,
+  stockOptions,
   rowValue,
   colValue,
 }) {
@@ -97,6 +98,7 @@ export function ChartBody({
         data={data}
         colValue={colValue}
         maxRowsAllowed={maxRowsAllowed}
+        stockOptions={stockOptions}
         startIndex={startIndex}
         endIndex={endIndex}
       />

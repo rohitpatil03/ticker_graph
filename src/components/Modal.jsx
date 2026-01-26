@@ -29,7 +29,7 @@ export function Modal({
         };
       });
     }
-    if (key.name === "return" && selectionOptionsHashMap != {}) {
+    if (key.name === "return" && selectionOptionsHashMap != {} && showModal) {
       handleSubmitCallback(selectionOptionsHashMap.selected_option);
     }
   });

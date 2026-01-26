@@ -157,6 +157,7 @@ export function App() {
         setMaxValue={setMaxValue}
         maxRowsAllowed={maxRowsAllowed}
         setMaxRowsAllowed={setMaxRowsAllowed}
+        stockOptions={stockOptions}
         rowValue={rowValue}
         colValue={colValue}
       />
