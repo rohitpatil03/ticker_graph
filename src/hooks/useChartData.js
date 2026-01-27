@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { loadJSONData } from "../utils/fileLoader.js";
 import YahooFinance from "yahoo-finance2";
 
@@ -42,23 +42,35 @@ export function useChartData(filePath) {
  * @param {string} endDate - "2024-12-31"
  * @returns {Object} { data, isLoading, error }
  */
-export function useChartDataFromYahoo(symbol, interval = "1d", startDate, endDate) {
+export function useChartDataFromYahoo(
+  symbol,
+  interval = "1d",
+  startDate,
+  endDate,
+  isAutoRefreshEnabled = true
+) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const intervalRef = useRef(null);
+
   useEffect(() => {
     if (!symbol || !startDate || !endDate) return;
 
-    const fetchData = async () => {
+    const fetchData = async (intervalGap=0) => {
       setIsLoading(true);
       setError(null);
       try {
         const yahoo = new YahooFinance();
 
+        if((new Date(endDate*1000 + intervalGap) instanceof Date) > Date.now()){
+          return
+        }
+
         const result = await yahoo.chart(symbol, {
           period1: startDate,
-          period2: endDate,
+          period2: endDate+intervalGap,
           interval,
           includePrePost: false,
         });
@@ -81,8 +93,28 @@ export function useChartDataFromYahoo(symbol, interval = "1d", startDate, endDat
       }
     };
 
-    fetchData();
-  }, [symbol, interval, startDate, endDate]);
+    const intervalTimer = (interval) => {
+      const map = {
+        "15m": 900,
+        "30m": 1800,
+        "1h": 3600,
+        "1d": 86400,
+      };
+
+      return map[interval] ?? 86400;
+    };
+
+    if (intervalRef == null) {
+      intervalRef.current();
+    } else {
+      fetchData();
+      if(isAutoRefreshEnabled){
+        intervalRef.current = setInterval(() => {
+          fetchData(intervalTimer(interval));
+        }, intervalTimer(interval)*1000);
+      }
+    }
+  }, [symbol, interval, startDate, endDate, isAutoRefreshEnabled]);
 
   return { data, isLoading, error };
 }

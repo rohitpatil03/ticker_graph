@@ -29,12 +29,14 @@ export function App() {
   });
   const [showModal, setShowModal] = useState(false);
   const [updateModalCategory, setUpdateModalCategory] = useState("ROW");
+  const [isAutoRefreshEnabled, setIsAutoRefreshEnabled] = useState(true)
   const [modalText, setModalText] = useState("");
   const { data, isLoading, error } = useChartDataFromYahoo(
     stockOptions.name,
     stockOptions.interval,
     stockOptions.start_date,
     stockOptions.end_date,
+    isAutoRefreshEnabled
   );
   const renderer = useRenderer();
   const {
@@ -64,6 +66,9 @@ export function App() {
       setTimeout(() => {
         setIsLeaderKeyActive(false);
       }, 3000);
+    }
+    if (key.ctrl && key.name == "r"){
+      setIsAutoRefreshEnabled((prev)=>!prev)
     }
     if (isLeaderKeyActive && !showModal) {
       if (key.name == "r") {
@@ -159,7 +164,7 @@ export function App() {
 
   return (
     <>
-      <TopBar stockOptions={stockOptions} />
+      <TopBar stockOptions={stockOptions} isAutoRefreshEnabled={isAutoRefreshEnabled}/>
       <ChartBody
         data={data}
         chartWidth={chartWidth}
