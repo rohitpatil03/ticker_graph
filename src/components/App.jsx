@@ -4,6 +4,7 @@ import { useChartData, useChartDataFromYahoo } from "../hooks/useChartData.js";
 import { useChartDimensions } from "../hooks/useChartDimensions.js";
 import { ChartBody } from "./ChartBody.jsx";
 import { Modal } from "./Modal.jsx";
+import { TopBar } from "./TopBar.jsx";
 
 /**
  * Main App component
@@ -14,6 +15,7 @@ export function App() {
 
   const endDate = Math.floor(Date.now() / 1000);
   const options = ["15m", "30m", "1h", "1d"];
+  const [isLeaderKeyActive, setIsLeaderKeyActive] = useState(false);
 
   const [stockOptions, setStockOptions] = useState({
     name: "AAPL",
@@ -57,43 +59,52 @@ export function App() {
     if (key.raw === "`") {
       renderer.console.toggle();
     }
-    if (key.ctrl && key.name == "r") {
-      setModalText("Enter the row value: ");
-      setUpdateModalCategory("ROW");
-      setShowModal(true);
-    }
-    if (key.ctrl && key.name == "d") {
-      setModalText("Enter the number of columns: ");
-      setUpdateModalCategory("COLUMN");
-      setShowModal(true);
-    }
-    if (key.ctrl && key.name == "a") {
-      setModalText("Enter the Stock Name: ");
-      setUpdateModalCategory("STOCK_NAME");
-      setShowModal(true);
-    }
     if (key.ctrl && key.name == "t") {
-      setModalText("Enter the Start Date (dd/mm/yyyy): ");
-      setUpdateModalCategory("STOCK_START_DATE");
-      setShowModal(true);
+      setIsLeaderKeyActive(true);
+      setTimeout(() => {
+        setIsLeaderKeyActive(false);
+      }, 3000);
     }
-    if (key.ctrl && key.name == "y") {
-      setModalText("Enter the End Date (dd/mm/yyyy): ");
-      setUpdateModalCategory("STOCK_END_DATE");
-      setShowModal(true);
-    }
+    if (isLeaderKeyActive && !showModal) {
+      if (key.name == "r") {
+        setModalText("Enter the row value: ");
+        setUpdateModalCategory("ROW");
+        setShowModal(true);
+      }
+      if (key.name == "c") {
+        setModalText("Enter the number of columns: ");
+        setUpdateModalCategory("COLUMN");
+        setShowModal(true);
+      }
+      if (key.name == "s") {
+        setModalText("Enter the Stock Name: ");
+        setUpdateModalCategory("STOCK_NAME");
+        setShowModal(true);
+      }
+      if (key.name == "h") {
+        setModalText("Enter the Start Date (dd/mm/yyyy): ");
+        setUpdateModalCategory("STOCK_START_DATE");
+        setShowModal(true);
+      }
+      if (key.name == "l") {
+        setModalText("Enter the End Date (dd/mm/yyyy): ");
+        setUpdateModalCategory("STOCK_END_DATE");
+        setShowModal(true);
+      }
 
-    if (key.ctrl && key.name == "q") {
-      setModalText("Enter the Stock Interval: ");
-      setSelectionOptionsHashMap({
-        selected_option: options[0] != null ? options[0] : null,
-        options: options,
-      });
-      setUpdateModalCategory("STOCK_INTERVAL");
-      setShowModal(true);
+      if (key.name == "i") {
+        setModalText("Enter the Stock Interval: ");
+        setSelectionOptionsHashMap({
+          selected_option: options[0] != null ? options[0] : null,
+          options: options,
+        });
+        setUpdateModalCategory("STOCK_INTERVAL");
+        setShowModal(true);
+      }
     }
 
     if (key.name === "escape") {
+      setIsLeaderKeyActive(false);
       setShowModal(false);
       setSelectionOptionsHashMap({
         options: [],
@@ -148,7 +159,7 @@ export function App() {
 
   return (
     <>
-      <text>STOCK NAME: ({stockOptions.name})</text>
+      <TopBar stockOptions={stockOptions} />
       <ChartBody
         data={data}
         chartWidth={chartWidth}
@@ -184,15 +195,13 @@ export function App() {
           if (updateModalCategory == "STOCK_START_DATE") {
             setStockOptions((prev) => ({
               ...prev,
-              start_date:
-                prev.end_date > value ? value : prev.start_date,
+              start_date: prev.end_date > value ? value : prev.start_date,
             }));
           }
           if (updateModalCategory == "STOCK_END_DATE") {
             setStockOptions((prev) => ({
               ...prev,
-              end_date:
-                prev.start_date < value ? value : prev.end_date,
+              end_date: prev.start_date < value ? value : prev.end_date,
             }));
           }
 
