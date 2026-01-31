@@ -43,11 +43,11 @@ export function ChartBody({
       }
     }
     if(key.raw === "j"){
-      setMaxValue((prev)=>prev-rowValue)
+      setMaxValue((prev)=>prev-Number(rowValue))
 
     }
     if(key.raw === "k"){
-      setMaxValue((prev)=>prev+rowValue)
+      setMaxValue((prev)=>prev+Number(rowValue))
 
     }
 
