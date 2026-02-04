@@ -1,0 +1,68 @@
+{
+  "title": "Keyboard Shortcuts Help",
+  "description": "This page lists all available keyboard shortcuts and leader key commands.",
+  "sections": [
+    {
+      "name": "Global Shortcuts",
+      "shortcuts": [
+        {
+          "keys": "`",
+          "action": "Toggle developer console"
+        },
+        {
+          "keys": "Ctrl + T",
+          "action": "Activate leader key mode"
+        },
+        {
+          "keys": "Ctrl + R",
+          "action": "Toggle auto refresh"
+        },
+        {
+          "keys": "Esc",
+          "action": "Close active modal, help, and cancel leader mode"
+        }
+      ]
+    },
+    {
+      "name": "Leader Key Commands",
+      "description": "Press Ctrl + T, then one of the following keys",
+      "shortcuts": [
+        {
+          "keys": "r",
+          "action": "Set number of rows",
+          "prompt": "Enter the row value"
+        },
+        {
+          "keys": "c",
+          "action": "Set number of columns",
+          "prompt": "Enter the number of columns"
+        },
+        {
+          "keys": "s",
+          "action": "Set stock name",
+          "prompt": "Enter the Stock Name"
+        },
+        {
+          "keys": "h",
+          "action": "Set stock start date",
+          "prompt": "Enter the Start Date (dd/mm/yyyy)"
+        },
+        {
+          "keys": "l",
+          "action": "Set stock end date",
+          "prompt": "Enter the End Date (dd/mm/yyyy)"
+        },
+        {
+          "keys": "i",
+          "action": "Set stock interval",
+          "prompt": "Select Stock Interval from list"
+        },
+        {
+          "keys": "?",
+          "action": "Open help modal"
+        }
+      ]
+    }
+  ]
+}
+

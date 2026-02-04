@@ -5,6 +5,7 @@ import { useChartDimensions } from "../hooks/useChartDimensions.js";
 import { ChartBody } from "./ChartBody.jsx";
 import { Modal } from "./Modal.jsx";
 import { TopBar } from "./TopBar.jsx";
+import { HelpModal } from "./HelpModal.jsx";
 
 /**
  * Main App component
@@ -28,15 +29,16 @@ export function App() {
     selected_option: "",
   });
   const [showModal, setShowModal] = useState(false);
+  const [showHelpModal, setShowHelpModal] = useState(false);
   const [updateModalCategory, setUpdateModalCategory] = useState("ROW");
-  const [isAutoRefreshEnabled, setIsAutoRefreshEnabled] = useState(true)
+  const [isAutoRefreshEnabled, setIsAutoRefreshEnabled] = useState(true);
   const [modalText, setModalText] = useState("");
   const { data, isLoading, error } = useChartDataFromYahoo(
     stockOptions.name,
     stockOptions.interval,
     stockOptions.start_date,
     stockOptions.end_date,
-    isAutoRefreshEnabled
+    isAutoRefreshEnabled,
   );
   const renderer = useRenderer();
   const {
@@ -67,8 +69,8 @@ export function App() {
         setIsLeaderKeyActive(false);
       }, 3000);
     }
-    if (key.ctrl && key.name == "r"){
-      setIsAutoRefreshEnabled((prev)=>!prev)
+    if (key.ctrl && key.name == "r") {
+      setIsAutoRefreshEnabled((prev) => !prev);
     }
     if (isLeaderKeyActive && !showModal) {
       if (key.name == "r") {
@@ -106,11 +108,15 @@ export function App() {
         setUpdateModalCategory("STOCK_INTERVAL");
         setShowModal(true);
       }
+      if (key.raw == "?") {
+        setShowHelpModal(true);
+      }
     }
 
     if (key.name === "escape") {
       setIsLeaderKeyActive(false);
       setShowModal(false);
+      setShowHelpModal(false);
       setSelectionOptionsHashMap({
         options: [],
         selected_option: "",
@@ -164,7 +170,10 @@ export function App() {
 
   return (
     <>
-      <TopBar stockOptions={stockOptions} isAutoRefreshEnabled={isAutoRefreshEnabled}/>
+      <TopBar
+        stockOptions={stockOptions}
+        isAutoRefreshEnabled={isAutoRefreshEnabled}
+      />
       <ChartBody
         data={data}
         chartWidth={chartWidth}
@@ -223,6 +232,7 @@ export function App() {
           }
         }}
       />
+      {showHelpModal && <HelpModal showHelpModal={showHelpModal} />}
     </>
   );
 }
