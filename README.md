@@ -27,9 +27,22 @@ To install Bun, visit [bun.sh](https://bun.sh)
 
 ## Installation
 
+### Option 1: Download Precompiled Binary
+
+Download the latest precompiled binary for your platform from [GitHub Releases](https://github.com/rohitpatil03/ticker_graph/releases):
+
+
+```bash
+# Extract and run the binary
+chmod +x ticker_graph  # (On macOS/Linux)
+./ticker_graph
+```
+
+### Option 2: Build from Source
+
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/rohitpatil03/ticker_graph.git
    cd ticker_graph
    ```
 
@@ -204,7 +217,7 @@ MIT
 Your support helps us continue development and makes it easier for others to discover this tool.
 
 ```
-git clone https://github.com/yourusername/ticker_graph.git
+git clone https://github.com/rohitpatil03/ticker_graph.git
 cd ticker_graph
 bun install
 bun dev
