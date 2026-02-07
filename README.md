@@ -13,6 +13,12 @@ A powerful terminal-based stock price charting application built with React and 
 - **Leader Key Commands**: Efficient keyboard shortcuts for quick access
 - **Cross-platform**: Works seamlessly on macOS, Linux, and Windows (with WSL)
 
+## Demo Video
+
+Watch our demo video to see Ticker Graph in action:
+
+![Demo Video](assets/Demo_Video.mp4)
+
 ## Prerequisites
 
 - **Bun** (v1.0+) - Fast all-in-one JavaScript runtime
