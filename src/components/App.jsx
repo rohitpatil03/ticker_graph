@@ -56,6 +56,7 @@ export function App() {
   // Initialize renderer and show console
   useEffect(() => {
     renderer.console.show();
+    renderer.console.hide();
   }, [renderer]);
 
   // Handle keyboard shortcuts
