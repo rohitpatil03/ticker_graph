@@ -17,7 +17,10 @@ A powerful terminal-based stock price charting application built with React and 
 
 Watch our demo video to see Ticker Graph in action:
 
-![Demo Video](assets/Demo_Video.mp4)
+<video width="800" controls>
+  <source src="assets/Demo_Video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Prerequisites
 
