@@ -17,7 +17,7 @@ export function Onboarding() {
   return (
     <>
       {isOboardingDone ? (
-        <App stock_name={value} />
+        <App stockName={value} />
       ) : (
         <box
           justifyContent="flex-start"
