@@ -11,7 +11,7 @@ import { HelpModal } from "./HelpModal.jsx";
  * Main App component
  * Orchestrates chart rendering and user interactions
  */
-export function App({stock_name}) {
+export function App({stockName}) {
   // const { data, isLoading, error } = useChartData("./src/data.json");
 
   const endDate = Math.floor(Date.now() / 1000);
@@ -19,7 +19,7 @@ export function App({stock_name}) {
   const [isLeaderKeyActive, setIsLeaderKeyActive] = useState(false);
 
   const [stockOptions, setStockOptions] = useState({
-    name: stock_name,
+    name: stockName,
     interval: "1h",
     end_date: endDate,
     start_date: endDate - 86400 * 7,
