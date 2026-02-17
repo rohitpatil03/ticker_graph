@@ -1,6 +1,6 @@
 import { createCliRenderer, ConsolePosition } from "@opentui/core";
 import { createRoot } from "@opentui/react";
-import { App } from "./components/App.jsx";
+import { Onboarding } from "./components/Onboarding.jsx";
 
 
 
@@ -17,7 +17,7 @@ async function main() {
     },
   });
 
-  createRoot(renderer).render(<App />);
+  createRoot(renderer).render(<Onboarding />);
 }
 
 main();
